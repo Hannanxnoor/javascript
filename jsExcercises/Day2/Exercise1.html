@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DOM Manipulation and Events</title>
+</head>
+<body>
+<h2>Exercise 1</h2>
+
+<!--Der oprettes 4 div elemeneter med unikke id'er -->
+
+<div id="div1" style="width: 50px;margin: 1px;">&nbsp;</div>
+<div id="div2" style="width: 50px;margin: 1px;">&nbsp;</div>
+<div id="div3" style="width: 50px;margin: 1px;">&nbsp;</div>
+<div id="div4" style="width: 50px;margin: 1px;">&nbsp;</div>
+
+<button id="btn">Change Color</button>
+
+
+<script>
+  const divs = document.querySelectorAll("div")
+
+  for(let i = 0; i<4; i++){
+    console.log(divs[i])
+    divs[i].style.backgroundColor = "red"
+  }
+  document.getElementById("btn").onclick = ()=> {
+    document.querySelector("#div1").style.backgroundColor = "blue"
+    divs[1].style.backgroundColor = "yellow"
+    divs[2].style.backgroundColor = "pink"
+    divs[3].style.backgroundColor = "orange"
+
+  }
+
+</script>
+</body>
+</html>
+
