@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cool Beers</title>
+  <title>Cool Beers</title>
+  <!-- bootstrap CSS included -->
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+<h2>Cool Beers</h2>
+<input type="number" id="filter-abv">
+<button id="abv-btn">Show only beers with ABV above</button>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Tagline</th>
+    <th>ABV</th>
+    <th>IBU</th>
+  </tr>
+  </thead>
+  <tbody id="table-rows">
+  </tbody>
+</table>
+
+<script>
+
+  const abvBtn = document.getElementById("abv-btn");
+  const tableRows = document.getElementById("table-rows");
+  let beers = [];
+
+  abvBtn.addEventListener("click", filterOnAbv);
+
+
+  // All data from the api gets fetched
+  fetchBeers();
+  function fetchBeers() {
+    fetch("https://api.punkapi.com/v2/beers")
+            .then(res => res.json())
+            .then(data => {
+              beers = data;
+              makeRows(beers);
+            });
+  }
+
+  //Tables gets generated
+  function makeRows(beers) {
+    const rows = beers.map(b => `
+                <tr>
+                    <td>${b.name}</td>
+                    <td>${b.tagline}</td>
+                    <td>${b.abv}</td>
+                    <td>${b.ibu}</td>
+                </tr>`).join("\n");
+
+    tableRows.innerHTML = rows;
+  }
+
+  //lars excempel
+  //Beers by ABV gets filtered
+  function filterOnAbv() {
+    alert("Filtering on ABV")
+    const abvMin = document.getElementById("filter-abv").value
+    const filteredBeers = beers.filter(beer => beer.abv > abvMin);
+    makeRows(filteredBeers)
+  }
+</script>
+</body>
+</html>
